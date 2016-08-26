@@ -41,7 +41,7 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         user_rot = int(escape_html(self.request.get("rotation")))
         user_message = escape_html(self.request.get("text"))
-        answer = encrypt(self.request.get("text"), user_rot)
+        answer = encrypt(user_message, user_rot)
         self.write_form(user_rot, answer)
 
 
