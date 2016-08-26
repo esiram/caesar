@@ -13,10 +13,10 @@ form = """
       <form method="post">
         <label><b>Rotation Amount:</b></label>
           <input type="text" name="rotation" value="%(rotation)s"
-                    style="height: 20px; width: 50px">
+                    style="height: 20px; width: 50px"/>
       <br>
         <p><label><b>Secret Message:</b></label></p>
-          <textarea name="text" value="%(text)s" style="height: 100px; width: 400px">
+          <textarea name="text" style="height: 100px; width: 400px">%(text)s
           </textarea>
       <br>
         <p><input type="submit" value="Submit"></p>
@@ -41,7 +41,7 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         user_rot = int(escape_html(self.request.get("rotation")))
         user_message = escape_html(self.request.get("text"))
-        answer = encrypt(user_message, user_rot)
+        answer = encrypt(self.request.get("text"), user_rot)
         self.write_form(user_rot, answer)
 
 
